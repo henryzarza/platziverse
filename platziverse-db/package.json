@@ -1,0 +1,31 @@
+{
+  "name": "platziverse-db",
+  "version": "1.0.0",
+  "description": "A simple IoT platform - DB Module",
+  "main": "index.js",
+  "scripts": {
+    "setup": "DEBUG=platziverse:* node setup.js",
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henryzarza/platziverse.git"
+  },
+  "author": "Henry Zarza",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/henryzarza/platziverse/issues"
+  },
+  "homepage": "https://github.com/henryzarza/platziverse#readme",
+  "devDependencies": {
+    "standard": "^10.0.3"
+  },
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "debug": "^3.1.0",
+    "inquirer": "^4.0.2",
+    "pg": "^7.4.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.28.6"
+  }
+}
