@@ -1,6 +1,5 @@
 'use strict'
 
-const debug = require('debug')('platziverse:db:setup')
 const inquirer = require('inquirer')
 const chalk = require('chalk')
 const db = require('./')
@@ -22,15 +21,7 @@ async function setup () {
     }
   }
 
-  const config = {
-    database: process.env.DB_NAME || 'platziverse',
-    usermane: process.env.DB_USER || 'henryzarza',
-    password: process.env.DB_PASS || '1234',
-    host: process.env.DB_HOST || 'localhost',
-    dialect: 'postgres',
-    logging: s => debug(s),
-    setup: true
-  }
+  const config = require('./config-db')()
 
   await db(config).catch(handleFatalError)
 
