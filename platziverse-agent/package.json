@@ -1,0 +1,29 @@
+{
+  "name": "platziverse-agent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A simple platform IoT - Agent",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henryzarza/platziverse.git"
+  },
+  "author": "Henry Zarza",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/henryzarza/platziverse/issues"
+  },
+  "homepage": "https://github.com/henryzarza/platziverse#readme",
+  "devDependencies": {
+    "standard": "^10.0.3"
+  },
+  "dependencies": {
+    "debug": "^3.1.0",
+    "defaults": "^1.0.3",
+    "mqtt": "^2.15.1",
+    "uuid": "^3.1.0"
+  }
+}
