@@ -8,6 +8,9 @@ module.exports = function (init = true) {
     host: process.env.DB_HOST || 'localhost',
     dialect: 'postgres',
     logging: s => debug(s),
-    setup: init
+    setup: init,
+    auth: {
+      secret: process.env.SECRET || 'platzi'
+    }
   }
 }
