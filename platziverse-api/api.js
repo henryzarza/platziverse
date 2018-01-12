@@ -3,8 +3,10 @@
 const debug = require('debug')('platziverse-routes')
 const express = require('express')
 const db = require('platziverse-db')
-const config = require('platziverse-db/config-db')(false)
+const config = require('../platziverse-db/config-db')(false)
 const asyncify = require('express-asyncify')
+const auth = require('express-jwt')
+const guard = require('express-jwt-permissions')()
 
 const api = asyncify(express.Router())
 
@@ -26,12 +28,22 @@ api.use('*', async (req, res, next) => {
   next()
 })
 
-api.get('/agents', async (req, res, next) => {
+api.get('/agents', auth(config.auth), async (req, res, next) => {
   debug('A request has come to /agents')
+
+  const { user } = req
+
+  if (!user || !user.username) {
+    return next(new Error('Not authorized'))
+  }
 
   let agents = []
   try {
-    agents = await Agent.findConnected()
+    if (user.admin) {
+      agents = await Agent.findConnected()
+    } else {
+      agents = await Agent.findByUsername(user.username)
+    }
   } catch (e) {
     return next(e)
   }
@@ -39,7 +51,7 @@ api.get('/agents', async (req, res, next) => {
   res.send(agents)
 })
 
-api.get('/agent/:uuid', async (req, res, next) => {
+api.get('/agent/:uuid', auth(config.auth), guard.check(['metrics:read']), async (req, res, next) => {
   const { uuid } = req.params
 
   debug(`request to /agent/${uuid}`)
